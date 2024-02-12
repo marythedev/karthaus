@@ -36,7 +36,11 @@ This document outlines the team's working agreement. It is intended to guide our
 ## Coding Practices
 **Version Control**: Use Git as a version control system and use clear commit messages. Commit regularly.
 
-**Consistency**: Keep consistent style with the rest of the codebase. Use meaningful variables and will stick to the best standard coding practices.
+**Variable Naming**: Use meaningful short identifiable variable names in a camelCase style. Avoid abbreviations (i.e. `accelerometer` is more preferable than `acclmtr`). Do not include variable type in its name.
+
+**Conditionals**: Use a [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator) instead of an `if...else` statement where possible.
+
+**Comments**: Add comments when the purpose or logic of the code isn't obvious. If the logic is obvious from the code, do not restate the code in prose by adding a comment. For variables, functions, objects, etc. it is better to have explicit names that describe what they're doing instead of adding comments.
 
 ## Quality Standards
 **Code Reviews**: All code must be reviewed by at least one other team member before merging.
@@ -57,3 +61,13 @@ This document outlines the team's working agreement. It is intended to guide our
 
 ## Amendments to the Agreement
 **Review and Update**: This document should be reviewed and updated quarterly or as needed.
+
+## Signatures:
+By signing below, each team member acknowledges that they have read, understood, and agree to abide by this Team Working Agreement.
+
+Stephen Vizl | Jan 29, 2024
+
+Tianchen Zhang | Jan 29, 2024
+
+Maria Dmytrenko | Jan 29, 2024
+
