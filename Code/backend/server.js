@@ -1,9 +1,11 @@
 //Setup & Required
 const express = require("express");
+const cors = require('cors');
 require("dotenv").config();
 const routeController = require("./controllers/routeController");
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT;
 
 // Terminal Logging Functionality
