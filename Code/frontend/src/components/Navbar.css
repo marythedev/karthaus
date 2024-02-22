@@ -1,0 +1,36 @@
+.navbar-container {
+  background-color: #333;
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar li {
+  margin-right: 40px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navbar a:hover {
+  color: #ccc;
+}
+
+.navbar .logo {
+  width: 50px;
+  height: auto;
+}
