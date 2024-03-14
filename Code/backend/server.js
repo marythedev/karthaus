@@ -1,22 +1,51 @@
+//Testing Variables
+const enableLogging = false; // change to true get terminal outputs
+
 //Setup & Required
 const express = require("express");
 const cors = require('cors');
 require("dotenv").config();
+const mongoose = require("mongoose");
 const routeController = require("./controllers/routeController");
+const { createUser } = require("./controllers/userController");
 
 const app = express();
 app.use(cors());
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
+app.use(express.json());
+
+// Mongo Connection
+const uri = "mongodb+srv://cAdmin:ug4C3Kt1nWmtEpok@clcap.zlpvbwi.mongodb.net/?retryWrites=true&w=majority&appName=CLCap"
+mongoose.connect(uri, {})
+.then(() => {
+  if (enableLogging){
+    console.log("MongoDB connected successfully");
+  }
+})
+.catch(err => {
+  console.error("Error connecting to MongoDB:", err);
+  process.exit(1);
+});
 
 // Terminal Logging Functionality
 app.use((req, res, next) => {
+  if (enableLogging){
   console.log(`${req.method} ${req.url}`);
+  }
   next();
 });
 
+
+
+
 // Routes
+app.get("/", routeController.default)
 app.get("/api/", routeController.get);
 app.post("/api/", routeController.post);
+app.post("/api/users", createUser);
+
+
+
 
 // Custom error handling for 404 Not Found errors
 app.use((req, res, next) => {
@@ -29,12 +58,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "500: Internal server error" });
 });
 
-// Server Startup Msg
-app.listen(PORT, () => {
+// start server
+const server = app.listen(PORT, () => {
+  if (enableLogging){
   console.log(`Server is running on port ${PORT}`);
+  }
 });
 
-// Basic Home Route
-app.get("/", (req, res) => {
-  res.send("Server is running");
-});
+module.exports = {app, server};
