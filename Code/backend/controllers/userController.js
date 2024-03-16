@@ -1,3 +1,8 @@
+/***********************************************
+*                                              *
+*   This File handles user account creation    *
+*                                              *
+***********************************************/ 
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
@@ -16,13 +21,13 @@ function validatePassword(password) {
   return true;
 }
 
-// Prevent noSQL Injection via validation regex
+//Help prevent noSQL injecton via validation regex
 function validateUsername(username) {
   const usernameRegex = /^[a-zA-Z0-9]+$/; 
   return usernameRegex.test(username);
 }
 
-//Prevent noSQL injecton via validation regex
+//Help prevent noSQL injecton via validation regex
 function validateEmail(email) {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailRegex.test(email);
