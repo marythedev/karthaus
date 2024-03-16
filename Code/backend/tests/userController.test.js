@@ -186,4 +186,49 @@ describe('User Controller', () => {
         expect(response.body.message).toBe('Email is already registered');
     });
 
+
+    //------------------------------------------------------------------
+    //                                Test 5
+    //------------------------------------------------------------------
+    it('should return an error for usernames containing symbols', async () => {
+      const newUser = {
+          username: 'test$user',
+          email: 'test5@example.com',
+          password: 'pAssword1111',
+      };
+
+      // Send a POST request with a username containing symbols
+      const response = await request(app)
+          .post('/api/users')
+          .send(newUser);
+
+      // Verify that the response status is 400 (Bad Request)
+      expect(response.status).toBe(400);
+
+      // Check that the response body contains an error message indicating that the username cannot contain symbols
+      expect(response.body.message).toBe('Username cannot contain symbols');
+    });
+
+  //------------------------------------------------------------------
+  //                                Test 6
+  //------------------------------------------------------------------
+  it('should return an error for emails containing symbols', async () => {
+    const newUser = {
+        username: 'testuser6',
+        email: 'test[]@example.com',
+        password: 'pAssword1111',
+    };
+
+    // Send a POST request with an email containing symbols
+    const response = await request(app)
+        .post('/api/users')
+        .send(newUser);
+
+    // Verify that the response status is 400 (Bad Request)
+    expect(response.status).toBe(400);
+
+    // Check that the response body contains an error message indicating that the email format is invalid
+    expect(response.body.message).toBe('Invalid email format');
+  });
+
 });

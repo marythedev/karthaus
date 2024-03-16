@@ -5,21 +5,17 @@ const enableLogging = false; // change to true get terminal outputs
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-
 const mongoose = require("mongoose");
 const routes = require("./routes/router");
-
 const app = express();
-app.use(cors());
 const PORT = process.env.PORT || 3000;
+app.use(cors());
 app.use(express.json());
 
 // Mongo Connection
 const uri =
   "mongodb+srv://cAdmin:ug4C3Kt1nWmtEpok@clcap.zlpvbwi.mongodb.net/?retryWrites=true&w=majority&appName=CLCap";
-mongoose
-  .connect(uri, {})
-  .then(() => {
+mongoose.connect(uri, {}).then(() => {
     if (enableLogging) {
       console.log("MongoDB connected successfully");
     }
