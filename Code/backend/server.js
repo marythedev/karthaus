@@ -46,11 +46,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "500: Internal server error" });
 });
 
-// start server
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   if (enableLogging) {
     console.log(`Server is running on port ${PORT}`);
   }
 });
 
-module.exports = { app, server };
+//module.exports = { app, server };
