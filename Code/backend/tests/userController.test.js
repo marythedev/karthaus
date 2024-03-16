@@ -1,3 +1,10 @@
+/**********************************************************************************************
+*                                                                                             *
+*          Make sure to uncomment the exports at bottom of server.js when testing             *
+*       When done testing, comment out the exports due to how vercel handles serverless       *
+*                                                                                             *
+**********************************************************************************************/ 
+
 const request = require('supertest');
 const bcrypt = require("bcrypt");
 const {app, server } = require('../server');
