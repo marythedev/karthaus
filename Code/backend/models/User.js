@@ -9,6 +9,13 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    twoFactorAuth: {
+      secret: String,
+      tempSecret: String,
+      dataURL: String,
+      otpURL: String,
+      isEnabled: Boolean,
+    },
   },
   { timestamps: true }
 );

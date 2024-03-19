@@ -10,6 +10,15 @@ const bcrypt = require("bcrypt");
 const {app, server } = require('../server');
 const User = require('../models/User');
 
+const jwt = require('jsonwebtoken');
+
+// Mocking 2FA verification for testing purposes
+jest.mock('speakeasy', () => ({
+  totp: {
+    verify: () => true // Always returns true for testing
+  }
+}));
+
 async function deleteUserByUsername(username) {
     try {
       const deletedUser = await User.findOneAndDelete({ username });
@@ -237,5 +246,29 @@ describe('User Controller', () => {
     // Check that the response body contains an error message indicating that the email format is invalid
     expect(response.body.message).toBe('Invalid email format');
   });
+
+
+ //------------------------------------------------------------------
+ //                                Test 7
+ //------------------------------------------------------------------
+ it('should login a user with valid credentials and a correct 2FA token', async () => {
+  // Assuming 'testuser' with a predefined password 'pAssword1111' exists
+
+  // Generate a 2FA token for the test user
+  // In a real scenario, replace the following line with actual token generation logic
+  const token = generate2FAToken('testuser');
+
+  const response = await request(app)
+      .post('/api/login') // Adjust this to your actual login endpoint
+      .send({
+          username: 'testuser',
+          password: 'pAssword1111',
+          token: token // Send the 2FA token along with login credentials
+      });
+
+  // Verify the login was successful and a token was received
+  expect(response.status).toBe(200);
+  expect(response.body).toHaveProperty('token');
+});
 
 });

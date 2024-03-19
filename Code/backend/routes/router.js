@@ -23,4 +23,7 @@ router.use("/api/admin", authenticateToken, adminController);
 // Product routes
 router.use("/api/products", productController); // Use product controller for product routes
 
+router.post('/enable-2fa', authenticateToken, userController.enable2FA);
+router.post('/verify-2fa', authenticateToken, userController.verify2FA);
+
 module.exports = router;
