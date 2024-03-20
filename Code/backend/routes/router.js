@@ -1,6 +1,6 @@
 const express = require("express");
 const routeController = require("../controllers/basicRouteController");
-const { createUser } = require("../controllers/userController");
+const { createUser, loginUser, enable2FA, verify2FA } = require("../controllers/userController");
 
 const authenticateToken = require("../middlewares/authenticateToken");
 const verifyAdmin = require("../middlewares/verifyAdmin");
