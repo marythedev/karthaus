@@ -52,3 +52,21 @@ ul, li {
 #home-category-nav li a:hover::after {
   width: 100%;
 }
+
+#carousel > * {
+  max-width: 100%;
+  max-height: 500px;
+}
+
+#carousel img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  max-height: 500px;
+}
+
+#carousel h1 {
+  color: white;
+  font-size: 3em;
+  z-index: 3000 !important;
+}
