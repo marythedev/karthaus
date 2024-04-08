@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
-import Carousel from 'react-bootstrap/Carousel';
+import UncontrolledCarousel from '../components/UncontrolledCarousel';
+import ProductSection from '../components/ProductSection';
 
 function scrollRight() {
   document.getElementById('home-category-nav').scrollLeft += 50;
@@ -10,35 +11,10 @@ function scrollLeft() {
   document.getElementById('home-category-nav').scrollLeft -= 50;
 }
 
-function UncontrolledCarousel() {
-  return (
-    <Carousel>
-      <Carousel.Item>
-        <img src={window.location.origin + '/images/placeholder-img.jpg'} alt="Placeholder img" className="img-fluid" />
-        <Carousel.Caption>
-          <h1>Tech Setup</h1>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img src={window.location.origin + '/images/placeholder-img.jpg'} alt="Placeholder img" className="img-fluid" />
-        <Carousel.Caption>
-          <h1>Tech Setup</h1>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img src={window.location.origin + '/images/placeholder-img.jpg'} alt="Placeholder img" className="img-fluid" />
-        <Carousel.Caption>
-          <h1>Tech Setup</h1>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-  );
-}
-
 const Home = () => {
   return (
     <div className="home-body">
-      <div id="home-category-container"className="d-flex flex-row align-items-center">
+      <div id="home-category-container" className="d-flex flex-row align-items-center">
         <button className="scroll-btn" id="prev" onClick={scrollLeft}>
           <img src={window.location.origin + '/icons/chevron-prev.png'} alt="previous" height={15}></img>
         </button>
@@ -58,9 +34,8 @@ const Home = () => {
         </button>
       </div>
 
-      <div id="carousel">
-        <UncontrolledCarousel />
-      </div>
+      <UncontrolledCarousel />
+      <ProductSection />
 
       <br></br>
       <br></br>

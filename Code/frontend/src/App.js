@@ -8,15 +8,17 @@ import RegisterPage from './pages/Register';
 
 function App() {
   return (
-    <>
+    <div style={{'min-height': '100vh', display: 'flex', 'flex-direction': 'column'}}>
       <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/exampleLandingPage" element={<ExampleLandingPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
+      <main style={{ flex: '1' }}>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/exampleLandingPage" element={<ExampleLandingPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
 
