@@ -8,15 +8,17 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <Link to="/">
-        <h1 class="league-spartan-bold">OnlineShop</h1>
+        <h1 className="league-spartan-bold">OnlineShop</h1>
       </Link>
-      <form method="POST" action="#" id="search-form">
-        <div>
-          <img src={window.location.origin + '/icons/search.png'} alt="search" height={20} />
-          <input type="text" placeholder="Search" />
-        </div>
-        <Button variant="dark" id="search-btn" type="submit">Go</Button>
-      </form>
+      <div id="search-form-container" className="d-flex align-items-center">
+        <form method="POST" action="#" id="search-form" className="d-flex flex-row justify-content-between align-items-center">
+          <div className="d-flex flex-row align-items-center" id="search-input-w-icon">
+            <img src={window.location.origin + '/icons/search.png'} alt="search" height={20} />
+            <input type="text" placeholder="Search" />
+          </div>
+          <Button variant="dark" id="search-btn" type="submit">Go</Button>
+        </form>
+      </div>
       <div id="getin-btns">
         <Link to="/login">
           <Button variant="dark">Login</Button>
