@@ -11,8 +11,6 @@ const jwt = require("jsonwebtoken");
 //Import speakeasy
 const speakeasy = require("speakeasy");
 
-
-
 //Password rules:
 const min = 12; //min length
 const max = 18; // max length
@@ -36,7 +34,7 @@ function validateEmail(email) {
 function verify2FAToken(userSecret, token) {
   return speakeasy.totp.verify({
     secret: userSecret,
-    encoding: 'base32',
+    encoding: "base32",
     token: token,
   });
 }
@@ -110,40 +108,52 @@ async function createUser(req, res) {
   }
 }
 
+//Login User functionality
 async function loginUser(req, res) {
-  const { username, password,token } = req.body;
+  const { username, password, token } = req.body;
 
   // Find the user by username
-  try{
-  let user = await User.findOne({ username });
-  if (!user) {
-    return res.status(400).json({ message: "User not found" });
+  try {
+    let user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    // Compare password
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // if (!verify2FAToken(user.twoFactorAuthenticationSecret, token)) {
+    //   return res.status(400).json({ message: "Invalid 2FA token" });
+    // }
+
+    // Generate a token
+    const authToken = jwt.sign(
+      { userId: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    // res.json({ message: "Login successful", token:authToken });
+    // Send user info along with the token
+    res.json({
+      message: "Login successful",
+      token: authToken,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        // Include any other user information you want to send
+      },
+    });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ message: "Server error" });
   }
-
-  // Compare password
-  const isValid = await bcrypt.compare(password, user.password);
-  if (!isValid) {
-    return res.status(400).json({ message: "Invalid credentials" });
-  }
-  
-  // if (!verify2FAToken(user.twoFactorAuthenticationSecret, token)) {
-  //   return res.status(400).json({ message: "Invalid 2FA token" });
-  // }
-
-  // Generate a token
-  const authToken = jwt.sign(
-    { userId: user._id, isAdmin: user.isAdmin },
-    process.env.JWT_SECRET,
-    { expiresIn: "1h" }
-  );
-
-  res.json({ message: "Login successful", token:authToken });
-} catch (error) {
-  console.error("Error during login:", error);
-  res.status(500).json({ message: "Server error" });
 }
-}
-
 
 module.exports = {
   createUser,
