@@ -52,6 +52,15 @@
   margin-right: 10px;
 }
 
+#logged-account {
+  gap: 25px;
+}
+
+#logged-account p {
+  margin: 0;
+  margin-right: 10px;
+}
+
 #getin-btns button {
   font-weight: 700;
   padding-left: 20px;

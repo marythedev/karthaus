@@ -33,16 +33,35 @@ const Navbar = () => {
           </Button>
         </form>
       </div>
-      <div id="getin-btns">
-        <Link to="/login">
-          <Button variant="dark">Login</Button>
-        </Link>
-        <Link to="/register">
-          <Button variant="outline-dark" id="signup-btn">
-            Signup
-          </Button>
-        </Link>
-      </div>
+      {localStorage.getItem("username") === null ? (
+        <div id="getin-btns">
+          <Link to="/login">
+            <Button variant="dark">Login</Button>
+          </Link>
+          <Link to="/register">
+            <Button variant="outline-dark" id="signup-btn">
+              Signup
+            </Button>
+          </Link>
+        </div>
+      ) : (
+        <div id="logged-account" className="d-flex flex-row align-items-center justify-content-center">
+          <Link to="/cart">
+            <img
+              src={window.location.origin + "/icons/cart.png"}
+              alt="cart"
+              height={28}
+            />
+          </Link>
+          <Link to="/account" className="d-flex flex-row align-items-center">
+            <p><strong>{localStorage.getItem("username")}</strong></p>
+            <img src={window.location.origin + "/icons/profile.png"}
+              alt="profile"
+              height={35}
+            />
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };

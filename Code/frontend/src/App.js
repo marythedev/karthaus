@@ -7,6 +7,7 @@ import ExampleLandingPage from "./pages/ExampleLandingPage";
 import RegisterPage from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/exampleLandingPage" element={<ExampleLandingPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<Account />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

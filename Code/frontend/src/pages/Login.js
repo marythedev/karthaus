@@ -26,9 +26,12 @@ const Login = () => {
         // Alert success
         alert("Login successful!");
         // Store token securely, for example in local storage
+        localStorage.setItem("username", username);
         localStorage.setItem("token", token);
         // Redirect to home page
         navigate("/");
+        // Reload the page (to update the nav)
+        window.location.reload();
         console.log(token);
       } else {
         // Handle invalid credentials
