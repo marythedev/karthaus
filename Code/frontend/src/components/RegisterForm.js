@@ -57,7 +57,7 @@ function RegisterForm() {
   };
 
   return (
-    <Container style={{ width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Container style={{ width: '100%', padding: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ maxWidth: '400px' }}>
         <h2 style={{ marginTop: '10px', marginRight: '45px', marginBottom: '25px', marginLeft: '10px' }}>Create your account</h2>
         <Form onSubmit={handleSubmit} style={{ width: '90%' }}>
