@@ -1,21 +1,25 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import ExampleLandingPage from './pages/ExampleLandingPage';
-import RegisterPage from './pages/Register';
-import NotFound from './pages/NotFound';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ExampleLandingPage from "./pages/ExampleLandingPage";
+import RegisterPage from "./pages/Register";
+import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/exampleLandingPage" element={<ExampleLandingPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
