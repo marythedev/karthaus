@@ -120,3 +120,6 @@ npm is utilized for package management and dependency tracking, streamlining the
 Jest provides fast and parallel test execution, helping to speed up the testing process.  It is designed to work right out of the box with minimal configuration required. 
 
 It has been used within the project at different stages to assist with testing (via simple automation) and ensure product behaviour.
+
+### Figma:
+Figma is used to create prototypes of interface design and animations for the web store pages.
