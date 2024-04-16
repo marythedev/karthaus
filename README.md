@@ -4,7 +4,7 @@
 | Name        |   Role |     Github    | Email       |
 | ----------- | --------- | --------- | --------------------------- |
 | Stephen Vizl  | Full-stack Dev| svizl1 | svizl1@myseneca.ca |
-| Maria Dmytrenko  | Front-End Dev | marythedev | mdmytrenko@myseneca.ca |
+| Maria Dmytrenko  | Lead Front-End Dev | marythedev | mdmytrenko@myseneca.ca |
 | Tianchen Zhang  | Back-End Dev | tzhang98 | tzhang98@myseneca.ca |
 | Abel Okoh  | Full-Stack Dev | Abellybaba | aokoh@myseneca.ca |
 
