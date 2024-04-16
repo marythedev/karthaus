@@ -84,4 +84,4 @@ Postman is employed for testing HTTP requests, allowing for the seamless testing
 npm is utilized for package management and dependency tracking, streamlining the integration of third-party libraries and tools.
 
 #### Figma:
-Figma is used to create interface design and animations for the web store pages.
+Figma is used to create prototypes of interface design and animations for the web store pages.
