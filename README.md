@@ -1,12 +1,12 @@
-# Group_13
+# OnlineShop
 
 ## Developers
 | Name        |   Role |     Github    | Email       |
 | ----------- | --------- | --------- | --------------------------- |
-| Stephen Vizl  | Role Placeholder | svizl1 | svizl1@myseneca.ca |
-| Maria Dmytrenko  | Role Placeholder | marythedev | mdmytrenko@myseneca.ca |
-| Tianchen Zhang  | Role Placeholder | tzhang98 | tzhang98@myseneca.ca |
-| Abel Okoh  | Role Placeholder | Abellybaba | aokoh@myseneca.ca |
+| Stephen Vizl  | Backend Developer | svizl1 | svizl1@myseneca.ca |
+| Maria Dmytrenko  | Frontend Developer | marythedev | mdmytrenko@myseneca.ca |
+| Tianchen Zhang  | Developer | tzhang98 | tzhang98@myseneca.ca |
+| Abel Okoh  | Database Developer | Abellybaba | aokoh@myseneca.ca |
 
 ## Project Description
 This project aims to create a powerful e-commerce platform designed specifically for a retail business. The envisioned website will serve as a comprehensive solution focused on facilitating efficient item sales and empowering the store to leverage data for informed marketing and business decisions. The project will concentrate on implementing key features to optimize the retail e-commerce process with a primary focus on:
@@ -15,16 +15,6 @@ This project aims to create a powerful e-commerce platform designed specifically
 
 Develop an engaging product showcase to highlight items with detailed descriptions, high-quality images, and pricing information.
 Implement features that encourage upselling, cross-selling, and promotional activities to maximize sales opportunities.
-
-### Data-Driven Insights:
-
-Integrate robust analytics tools to track and analyze customer behavior, purchasing patterns, and popular products.
-Provide actionable insights derived from gathered data to aid retail store owners in making informed marketing and business decisions.
-
-### Inventory Management and Demand Forecasting:
-
-Implement an advanced inventory management system to monitor stock levels, track product movement, and generate real-time reports.
-Utilize data analytics to forecast demand trends, helping retail businesses optimize their inventory and prevent stockouts or overstock situations.
 
 ### User Authentication and Account Management:
 
@@ -39,9 +29,16 @@ Integrate a secure payment gateway supporting various methods to ensure a smooth
 
 Ensure the website is responsive and accessible across different devices, providing a user-friendly experience for customers.
 
-### Admin Dashboard for Marketing and Business Insights:
+### Data-Driven Insights:
 
-Develop an intuitive admin dashboard tailored for retail store owners, providing insights into sales performance, customer demographics, and marketing campaign effectiveness.
+Integrate robust analytics tools to track and analyze customer behavior, purchasing patterns, and popular products.
+Provide actionable insights derived from gathered data to aid retail store owners in making informed marketing and business decisions.
+Develop an intuitive product owner dashboard tailored for retail store owners, providing insights into sales performance, customer demographics, and marketing campaign effectiveness.
+
+### Inventory Management and Demand Forecasting:
+
+Implement an advanced inventory management system to monitor stock levels, track product movement, and generate real-time reports.
+Utilize data analytics to forecast demand trends, helping retail businesses optimize their inventory and prevent stockouts or overstock situations.
 
 ### Customer Engagement and Feedback:
 
@@ -75,9 +72,6 @@ The user interface is built with React.js, a powerful JavaScript library for cre
 #### Bootstrap 5
 Bootstrap 5 is utilized for front-end styling, ensuring a responsive and visually appealing design across various devices and screen sizes.
 
-#### Axios:
-Axios is used for making asynchronous HTTP requests, enhancing the efficiency of data exchange between the front-end and back-end.
-
 ## Developing Tools
 
 #### Visual Studio Code:
@@ -88,3 +82,6 @@ Postman is employed for testing HTTP requests, allowing for the seamless testing
 
 #### npm (Node Package Manager):
 npm is utilized for package management and dependency tracking, streamlining the integration of third-party libraries and tools.
+
+#### Figma:
+Figma is used to create interface design and animations for the web store pages.
