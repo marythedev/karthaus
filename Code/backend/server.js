@@ -1,5 +1,5 @@
 //Testing Variables
-const enableLogging = false; // change to true get terminal outputs
+const enableLogging = true; // change to true get terminal outputs
 
 //Setup & Imports
 const express = require("express");

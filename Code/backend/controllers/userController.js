@@ -155,8 +155,42 @@ async function loginUser(req, res) {
   }
 }
 
+// Update User Profile
+async function updateUserProfile(req, res) {
+  const userId = req.user.userId; // Extract user ID from the JWT token
+  const { username, email, password } = req.body;
+
+  try {
+    // Find the user
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Validate and update user fields
+    if (username) user.username = username;
+    if (email) user.email = email;
+
+    // Hash new password if provided
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    const updatedUser = await user.save();
+    const { password: hashedPassword, ...otherDetails } = updatedUser._doc; // Do not send password in response
+    res
+      .status(200)
+      .json({ message: "Profile updated successfully", user: otherDetails });
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
 module.exports = {
   createUser,
   loginUser,
   verify2FAToken,
+  updateUserProfile,
 };
