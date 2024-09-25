@@ -49,24 +49,76 @@ router.get("/find/:id", async (req, res) => {
   }
 });
 
-// GET all products (Everyone)
-router.get("/", async (req, res) => {
-  const qNew = req.query.new;
-  const qCategory = req.query.category;
-  try {
-    let products;
+// GET all products (Everyone) Formal Get
+// router.get("/", async (req, res) => {
+//   const qNew = req.query.new;
+//   const qCategory = req.query.category;
+//   try {
+//     let products;
 
-    if (qNew) {
-      products = await Product.find().sort({ createdAt: -1 }).limit(5);
-    } else if (qCategory) {
-      products = await Product.find({ categories: { $in: [qCategory] } });
-    } else {
-      products = await Product.find();
+//     if (qNew) {
+//       products = await Product.find().sort({ createdAt: -1 }).limit(5);
+//     } else if (qCategory) {
+//       products = await Product.find({ categories: { $in: [qCategory] } });
+//     } else {
+//       products = await Product.find();
+//     }
+
+//     res.status(200).json(products);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+// Get All Products with Pagination, Search, and Filter
+//async function getAllProducts(req, res) {
+router.get("/", async (req, res) => {
+  const {
+    page = 1,
+    limit = 10,
+    search,
+    category,
+    minPrice,
+    maxPrice,
+  } = req.query;
+
+  try {
+    const query = {};
+
+    // Search by title (case-insensitive)
+    if (search) {
+      query.title = { $regex: search, $options: "i" };
     }
 
-    res.status(200).json(products);
+    // Filter by category
+    if (category) {
+      query.categories = { $in: [category] };
+    }
+
+    // Filter by price range
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = minPrice;
+      if (maxPrice) query.price.$lte = maxPrice;
+    }
+
+    // Get products with pagination
+    const products = await Product.find(query)
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
+
+    // Get total count for pagination metadata
+    const totalProducts = await Product.countDocuments(query);
+
+    res.status(200).json({
+      products,
+      currentPage: page,
+      totalPages: Math.ceil(totalProducts / limit),
+      totalProducts,
+    });
   } catch (err) {
-    res.status(500).json(err);
+    console.error("Error fetching products:", err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

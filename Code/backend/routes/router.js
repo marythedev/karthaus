@@ -9,16 +9,17 @@ const {
 const authenticateToken = require("../middlewares/authenticateToken");
 const isAdmin = require("../middlewares/isAdmin");
 
-
 const listUsers = require("../controllers/adminListUsers");
 const toggleStatus = require("../controllers/adminToggleAccStatus");
-const adminController = require("../controllers/adminController"); 
+const adminController = require("../controllers/adminController");
 const productController = require("../controllers/productController");
 const cartController = require("../controllers/cartController");
 const orderController = require("../controllers/orderController");
 const reviewController = require("../controllers/reviewController");
-const submitContactForm = require('../controllers/contactController');
+const submitContactForm = require("../controllers/contactController");
 
+const { updateUserProfile } = require("../controllers/userController");
+//const { getAllProducts } = require("../controllers/productController");
 const router = express.Router();
 
 router.get("/", routeController.default); // Server is running
@@ -26,9 +27,10 @@ router.get("/api/", routeController.get); //Test Route
 router.post("/api/", routeController.post); //Test Route
 router.post("/api/users", createUser); // Account Creation API
 
+// Profile Update Route
+router.put("/api/users/profile", authenticateToken, updateUserProfile);
+
 router.post("/api/login", loginUser); //Login users
-
-
 
 //**************************** admin stuff *******************************
 router.get("/api/admin/listUsers", authenticateToken, isAdmin, listUsers);
@@ -37,10 +39,10 @@ router.post("/api/admin/toggleUser", authenticateToken, isAdmin, toggleStatus);
 router.post("/api/contact", submitContactForm);
 //************************************************************************
 
-
-
 // Product routes
 router.use("/api/products", productController); // Use product controller for product routes
+// Get Products with Pagination, Search, and Filter
+// router.get("/api/products", getAllProducts);
 
 //router.post('/enable-2fa', authenticateToken, enable2FA); //Note to tianchen: enable 2FA does not exist in userController, why are you referencing this?
 router.post("/verify-2fa", authenticateToken, verify2FAToken);
