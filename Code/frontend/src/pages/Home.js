@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import "./Home.css";
 import UncontrolledCarousel from "../components/UncontrolledCarousel";
 import ProductSection from "../components/ProductSection";
