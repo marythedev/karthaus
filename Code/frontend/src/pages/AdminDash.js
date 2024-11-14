@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './AdminDash.css';
 import { logAction } from '../components/logAction';
 import ActivityLog from '../components/ActivityLog';
@@ -9,10 +9,12 @@ const AdminDash = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [totalMessages, setTotalMessages] = useState(0);
+  const [hasAccess, setHasAccess] = useState(true); // Track if the user has access
 
+  // Fetch logs data
   const fetchLogs = async () => {
     try {
-      const response = await fetch('https://group-13-jtix.vercel.app/api/log', {
+      const response = await fetch('http://localhost:3030/api/log', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -21,21 +23,27 @@ const AdminDash = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch logs');
+        if (response.status === 403) {
+          // If 403 Forbidden, deny access
+          setHasAccess(false);
+        } else {
+          throw new Error('Failed to fetch logs');
+        }
       }
 
       const data = await response.json();
       setLogs(data.logs || []);
-      fetchMessagesSummary(); 
+      fetchMessagesSummary();
     } catch (error) {
       console.error('Error fetching logs:', error);
+      setHasAccess(false); // Deny access if error occurs
     }
   };
 
+  // Fetch message summary data
   const fetchMessagesSummary = async () => {
     try {
-      console.log("starting...")
-        const response = await fetch('https://group-13-jtix.vercel.app/api/adminMessages', {
+      const response = await fetch('http://localhost:3030/api/adminMessages', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -44,32 +52,33 @@ const AdminDash = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch messages summary');
+        if (response.status === 403) {
+          setHasAccess(false);
+        } else {
+          throw new Error('Failed to fetch messages summary');
+        }
       }
 
       const data = await response.json();
-
       setUnreadMessages(data.unreadMessages || 0);
       setTotalMessages(data.totalMessages || 0);
     } catch (error) {
       console.error('Error fetching messages summary:', error);
+      setHasAccess(false); // Deny access if error occurs
     }
   };
 
-  useEffect(() => {
-    fetchLogs(); 
-  }, []);
-
-
+  // Log actions like clicks
   const handleLogAction = async (logMessage) => {
     try {
       await logAction(logMessage);
-      fetchLogs(); 
+      fetchLogs();
     } catch (error) {
       console.error('Error logging action:', error);
     }
   };
 
+  // Filter logs based on search term
   const filteredLogs = logs.filter((log) => {
     const logDate = new Date(log.timestamp).toLocaleString();
     return (
@@ -78,6 +87,20 @@ const AdminDash = () => {
       logDate.includes(searchTerm)
     );
   });
+
+  // Run fetch when the component mounts
+  useEffect(() => {
+    fetchLogs();
+  }, []);
+
+  if (!hasAccess) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <h2>Unauthorized</h2>
+        <p>You do not have permission to access this page. Please contact your administrator.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-dashboard-container">

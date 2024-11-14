@@ -6,7 +6,9 @@ const contactSchema = new mongoose.Schema({
   message: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   responded: { type: Boolean, default: false },
-  response: {type: String,}
+  response: { type: String },
 });
+
+contactSchema.index({ createdAt: 1 }, { expireAfterSeconds: 3 * 30 * 24 * 60 * 60 });
 
 module.exports = mongoose.model('Contact', contactSchema);
