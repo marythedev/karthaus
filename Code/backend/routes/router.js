@@ -54,6 +54,22 @@ router.get(
   isAdmin,
   adminMessages.getAllMessages
 );
+router.delete("/api/adminDeleteMessage/:id", authenticateToken, isAdmin, adminMessages.deleteMessage);
+router.delete(
+  "/api/adminDeleteMessages",
+  authenticateToken,
+  isAdmin,
+  adminMessages.deleteMessages
+);
+router.patch(
+  "/api/adminMarkMessagesAsResponded", 
+  authenticateToken, 
+  isAdmin, 
+  adminMessages.markMessagesAsResponded
+);
+
+router.post('/adminAddResponse', authenticateToken, isAdmin, adminMessages.addResponse);
+
 //************************************************************************
 
 // Product routes
