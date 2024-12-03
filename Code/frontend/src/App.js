@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import Messages from "./pages/Messages";
 import SearchResults from "./pages/SearchResults";
+import EmailComponent from "./components/Email";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/email" element={<EmailComponent />} />
         </Routes>
       <Footer />
     </div>

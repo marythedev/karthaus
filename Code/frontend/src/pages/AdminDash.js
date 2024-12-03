@@ -114,7 +114,7 @@ const AdminDash = () => {
               Manage Users
             </Link>
           </li>
-          <li><Link to="#" onClick={() => handleLogAction('clicked Module 2')}>Placeholder Module 2</Link></li>
+          <li><Link to="/email" onClick={() => handleLogAction('clicked into Emailer')}>Email & Updates</Link></li>
           <li><Link to="#" onClick={() => handleLogAction('clicked Module 3')}>Placeholder Module 3</Link></li>
           <li><Link to="#" onClick={() => handleLogAction('clicked Module 4')}>Placeholder Module 4</Link></li>
         </ul>
@@ -128,7 +128,7 @@ const AdminDash = () => {
           <div className="admin-card" onClick={() => handleLogAction('clicked into messages')}>
             <Link to="/messages">
               <img src="/icons/email.svg" alt="Messages" style={{ width: '50px', height: '50px' }} />
-              <div style={{ marginTop: '10px', fontWeight: 'bold' }}>Messages</div>
+              <div style={{ marginTop: '10px', fontWeight: 'bold' }}>Internal Messages</div>
               <div style={{ marginTop: '5px' }}>
                 <span>Total: {totalMessages}</span> <br />
                 <span>Unread: {unreadMessages}</span>

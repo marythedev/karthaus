@@ -18,6 +18,7 @@ const orderController = require("../controllers/orderController");
 const reviewController = require("../controllers/reviewController");
 const submitContactForm = require("../controllers/contactController");
 const adminLog = require("../controllers/adminLog");
+const email = require("../controllers/email");
 const adminMessages = require("../controllers/adminMessages");
 
 const { updateUserProfile } = require("../controllers/userController");
@@ -42,6 +43,7 @@ router.post("/api/contact", submitContactForm);
 
 router.get("/api/log", authenticateToken, isAdmin, adminLog.get);
 router.post("/api/log", authenticateToken, isAdmin, adminLog.post);
+router.post("/api/email", authenticateToken, isAdmin, email.post);
 router.get(
   "/api/adminMessages",
   authenticateToken,
