@@ -114,7 +114,7 @@ const AdminDash = () => {
               Manage Users
             </Link>
           </li>
-          <li><Link to="/email" onClick={() => handleLogAction('clicked into Emailer')}>Email & Updates</Link></li>
+          <li><Link to="/email" onClick={() => handleLogAction('clicked into Emailer')}>Send Emails</Link></li>
           <li><Link to="#" onClick={() => handleLogAction('clicked Module 3')}>Placeholder Module 3</Link></li>
           <li><Link to="#" onClick={() => handleLogAction('clicked Module 4')}>Placeholder Module 4</Link></li>
         </ul>
