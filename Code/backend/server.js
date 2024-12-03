@@ -8,14 +8,14 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const routes = require("./routes/router");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 app.use(cors());
 app.use(express.json());
 
 // Mongo Connection
 
 const uri = "mongodb+srv://capstone:5ai6KcG6Jll9EXA4@capstone-ecommerce.x4jcmxk.mongodb.net/?retryWrites=true&w=majority&appName=Capstone-Ecommerce";
-
+//const uri = "mongodb+srv://cAdmin:54xyPhKR5LhQDiIG@clcap.zlpvbwi.mongodb.net/?retryWrites=true&w=majority&appName=CLCap"
 
 mongoose
   .connect(uri, {})
