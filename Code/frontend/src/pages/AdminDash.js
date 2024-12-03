@@ -10,11 +10,13 @@ const AdminDash = () => {
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [totalMessages, setTotalMessages] = useState(0);
   const [hasAccess, setHasAccess] = useState(true); // Track if the user has access
+  const url = process.env.REACT_APP_BACKEND_URL;
+  //const url = 'https://group-13-jtix.vercel.app';
 
-  // Fetch logs data
+
   const fetchLogs = async () => {
     try {
-      const response = await fetch('http://localhost:3030/api/log', {
+      const response = await fetch(`${url}/api/log`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +45,7 @@ const AdminDash = () => {
   // Fetch message summary data
   const fetchMessagesSummary = async () => {
     try {
-      const response = await fetch('http://localhost:3030/api/adminMessages', {
+      const response = await fetch(`${url}/api/adminMessages`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

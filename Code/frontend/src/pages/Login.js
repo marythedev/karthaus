@@ -9,11 +9,13 @@ const Login = () => {
   const [error, setError] = useState("");
   const [accountEnabledError, setAccountEnabledError] = useState(false);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_BACKEND_URL;
+  //const url = 'https://group-13-jtix.vercel.app';
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://group-13-jtix.vercel.app/api/login", {
+      const response = await fetch(`${url}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

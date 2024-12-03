@@ -1,6 +1,9 @@
 export const logAction = async (message) => {
+    const url = process.env.REACT_APP_BACKEND_URL;
+    //const url = 'https://group-13-jtix.vercel.app';
+    
     try {
-        const response = await fetch('http://localhost:3030/api/log', {
+        const response = await fetch(`${url}/api/log`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

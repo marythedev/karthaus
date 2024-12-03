@@ -9,11 +9,13 @@ const ContactForm = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const url = process.env.REACT_APP_BACKEND_URL;
+  //const url = 'https://group-13-jtix.vercel.app';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3030/api/contact", {
+      const response = await fetch(`${url}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

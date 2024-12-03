@@ -17,7 +17,8 @@ const Messages = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchByResponded, setSearchByResponded] = useState('all');
-  const url = 'http://localhost:3030'
+  const url = process.env.REACT_APP_BACKEND_URL
+  //const url = 'https://group-13-jtix.vercel.app';
 
   const fetchMessages = async () => {
     try {

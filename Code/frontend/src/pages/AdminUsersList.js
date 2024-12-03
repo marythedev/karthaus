@@ -10,11 +10,13 @@ const AdminPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage, setUsersPerPage] = useState(20);
+    const url = process.env.REACT_APP_BACKEND_URL;
+    //const url = 'https://group-13-jtix.vercel.app';
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('https://group-13-jtix.vercel.app/api/admin/listUsers', {
+                const response = await fetch(`${url}/api/admin/listUsers`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -48,7 +50,7 @@ const AdminPage = () => {
 
         if (confirmAction) {
             try {
-                const response = await fetch(`https://group-13-jtix.vercel.app/api/admin/toggleUser`, {
+                const response = await fetch(`${url}/api/admin/toggleUser`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
