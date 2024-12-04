@@ -352,7 +352,7 @@ const Messages = () => {
           </ul>
         </div>
 
-        <div className="messages-list">
+        <div className="messages-list1">
           <div>
             <h2>Internal Messages</h2>
 
@@ -382,7 +382,7 @@ const Messages = () => {
           ) : (
             <ul>
               {currentMessages.map((message) => (
-                <li key={message._id} className="message-item">
+                <li key={message._id} className="message-item1">
                   <div
                     className="message-header"
                     onClick={() => toggleMessage(message._id)}
@@ -396,20 +396,19 @@ const Messages = () => {
                     <div>
                       <strong>Handled:</strong>
                       {message.responded ? (
-                        <span role="img" aria-label="checkmark">
+                        <span role="img" aria-label="checkmark" className='checkboxcustom'>
                           ✅
                         </span>
                       ) : (
-                        <span role="img" aria-label="crossmark">
+                        <span role="img" aria-label="crossmark" className='checkboxcustom'>
                           ❌
                         </span>
                       )}
                     </div>
                     <span className="date-section">
-                      <b>Date: </b>
-                      {new Date(message.createdAt).toLocaleString()}
+                      <b>Date: </b>{new Date(message.createdAt).toLocaleString()}
                     </span>
-                    <input
+                    <input className='otherCheckbox'
                       type="checkbox"
                       checked={selectedMessages.has(message._id)}
                       onClick={(e) => handleCheckboxChange(message._id, e)}

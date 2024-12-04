@@ -1,43 +1,57 @@
 .headerUser {
-    padding: 20px; /* Adjust padding as needed */
+    padding: 20px;
     display: flex;
-    justify-content: left; /* Center the table */
-}
-.table-container {
-    padding: 20px; /* Adjust padding as needed */
-    display: flex;
-    justify-content: center; /* Center the table */
+    justify-content: left;
 }
 
-.admin-table {
-    border-collapse: collapse;
-    width: 80%; /* Adjust the width as needed */
-}
-
-.admin-table th, .admin-table td {
-    border: 1px solid rgb(70, 64, 64);
-    padding: 8px;
-    text-align: left;
-}
-
-.search-bar {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-bar-container {
+.container1 {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.search-bar-container {
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    width: 80%;
+    border: 1px solid rgb(70, 64, 64);
+    background-color: rgb(70, 64, 64);
+}
+
+.table-header,
+.table-row {
+    display: contents;
+}
+
+.cell {
+    background-color: #fff;
+    padding: 8px;
+    border: 1px solid rgb(70, 64, 64);
+    text-align: left;
+}
+
+.header-cell {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
 .results-per-page-container {
-    padding: 10px 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,14 +69,8 @@
     text-align: center;
 }
 
-.table-container {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-}
-
 .pagination-container {
-    padding: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
