@@ -11,7 +11,6 @@ const AdminPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage, setUsersPerPage] = useState(20);
     const url = process.env.REACT_APP_BACKEND_URL;
-    //const url = 'https://group-13-jtix.vercel.app';
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -72,7 +71,6 @@ const AdminPage = () => {
 
                 const newStatus = updatedUser.user.account_enabled ? 'Enabled' : 'Disabled';
                 await logAction(`${newStatus} user account: "${username}"`);
-
             } catch (err) {
                 console.error(err);
             }
@@ -102,30 +100,16 @@ const AdminPage = () => {
         }
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (unauthorized) {
-        return (
-            <div className="unauthorized-message">
-                <h2>Access Denied</h2>
-                <p>You are not authorized to access this module.</p>
-            </div>
-        );
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+    if (loading) return <div>Loading...</div>;
+    if (unauthorized) return <div className="unauthorized-message">Access Denied</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
-        <div>
+        <div className="container1">
             <h1 className="headerUser">User List</h1>
 
             <div className="search-bar-container">
                 <input
-                    id="search"
                     type="text"
                     placeholder="Search by username or email"
                     value={searchTerm}
@@ -135,34 +119,29 @@ const AdminPage = () => {
             </div>
 
             <div className="table-container">
-                <table className="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Account Type</th>
-                            <th>Account Status</th>
-                            <th>Status Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentUsers.map(user => (
-                            <tr key={user.username}>
-                                <td>{user.username}</td>
-                                <td>{user.email}</td>
-                                <td>{user.account_type}</td>
-                                <td>{user.account_enabled ? 'Enabled' : 'Disabled'}</td>
-                                <td><button onClick={() => toggleStatus(user.username)}>Toggle Status</button></td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className="table-header">
+                    <div className="cell header-cell">Username</div>
+                    <div className="cell header-cell">Email</div>
+                    <div className="cell header-cell">Account Type</div>
+                    <div className="cell header-cell">Account Status</div>
+                    <div className="cell header-cell">Actions</div>
+                </div>
+                {currentUsers.map(user => (
+                    <div className="table-row" key={user.username}>
+                        <div className="cell">{user.username}</div>
+                        <div className="cell">{user.email}</div>
+                        <div className="cell">{user.account_type}</div>
+                        <div className="cell">{user.account_enabled ? 'Enabled' : 'Disabled'}</div>
+                        <div className="cell">
+                            <button onClick={() => toggleStatus(user.username)}>Toggle Status</button>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             <div className="results-per-page-container">
-                <label htmlFor="resultsPerPage">Results Per Page:</label>
+                <label>Results Per Page:</label>
                 <input
-                    id="resultsPerPage"
                     type="number"
                     value={usersPerPage}
                     onChange={(e) => setUsersPerPage(Number(e.target.value))}
@@ -172,13 +151,9 @@ const AdminPage = () => {
             </div>
 
             <div className="pagination-container">
-                <button onClick={handlePrevPage} disabled={currentPage === 1}>
-                    Previous
-                </button>
+                <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
                 <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                    Next
-                </button>
+                <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
             </div>
         </div>
     );
