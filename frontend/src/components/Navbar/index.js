@@ -2,12 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
 const Navbar = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [authenticated, setAuthenticated] = useState(false);
     const navigate = useNavigate();
     const searchContainerRef = useRef(null);
 
@@ -40,6 +42,15 @@ const Navbar = () => {
     };
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const decoded = token && jwtDecode(token);
+            setAuthenticated(decoded?.userId && decoded.exp * 1000 > Date.now());
+        } catch {
+            setAuthenticated(false);
+        }
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -65,7 +76,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <Link to="/">
-                <h1 className="league-spartan-bold">KartHaus</h1>
+                <h1 className="league-spartan-bold">Zino</h1>
             </Link>
             <div id="search-form-container" className="d-flex align-items-center" ref={searchContainerRef}>
                 <form
@@ -97,7 +108,17 @@ const Navbar = () => {
                 </form>
             </div>
             {/* Account section */}
-            {localStorage.getItem("username") === null ? (
+            {authenticated ? (
+                <div id="logged-account" className="d-flex flex-row align-items-center justify-content-center">
+                    <Link to="/cart">
+                        <img src={window.location.origin + "/icons/cart.png"} alt="cart" height={28} />
+                    </Link>
+                    <Link to="/account" className="d-flex flex-row align-items-center">
+                        <p><strong>{localStorage.getItem("username")}</strong></p>
+                        <img src={window.location.origin + "/icons/profile.png"} alt="profile" height={35} />
+                    </Link>
+                </div>
+            ) : (
                 <div id="getin-btns">
                     <Link to="/login">
                         <Button variant="dark">Login</Button>
@@ -106,16 +127,6 @@ const Navbar = () => {
                         <Button variant="outline-dark" id="signup-btn">
                             Signup
                         </Button>
-                    </Link>
-                </div>
-            ) : (
-                <div id="logged-account" className="d-flex flex-row align-items-center justify-content-center">
-                    <Link to="/cart">
-                        <img src={window.location.origin + "/icons/cart.png"} alt="cart" height={28} />
-                    </Link>
-                    <Link to="/account" className="d-flex flex-row align-items-center">
-                        <p><strong>{localStorage.getItem("username")}</strong></p>
-                        <img src={window.location.origin + "/icons/profile.png"} alt="profile" height={35} />
                     </Link>
                 </div>
             )}

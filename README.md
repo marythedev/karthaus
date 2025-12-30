@@ -1,4 +1,4 @@
-# KartHaus
+# Zino
 
 This project aims to create a powerful e-commerce platform designed specifically for a retail business. The envisioned website will serve as a comprehensive solution focused on facilitating efficient item sales and empowering the store to leverage data for informed marketing and business decisions. The project will concentrate on implementing key features to optimize the retail e-commerce process with a primary focus on:
 
