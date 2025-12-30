@@ -50,7 +50,7 @@ const Login = () => {
             <div className="auth-form-wrapper">
                 <div className="auth-form">
                     <h2>Login</h2>
-                    <p className="subtitle">Login to continue shopping</p>
+                    <p className="auth-subtitle">Login to continue shopping</p>
 
                     <form onSubmit={handleLogin}>
                         <input

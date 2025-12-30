@@ -31,7 +31,7 @@
     font-weight: 700
 }
 
-.subtitle {
+.auth-subtitle {
     color: #666;
     margin-bottom: 24px;
     font-size: 18px;
@@ -68,6 +68,10 @@
     transition: background 0.3s, transform 0.1s;
 }
 
+.auth-form button:hover {
+    background: #343a40;
+}
+
 .error-box {
     background: #ffe5e5;
     color: #b00020;
@@ -98,12 +102,12 @@
     text-decoration: underline;
 }
 
-aside {
+.auth-page-wrapper aside {
     flex: 1;
     height: 100%;
 }
 
-aside img {
+.auth-page-wrapper aside img {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -117,7 +121,7 @@ aside img {
         max-width: 100%;
     }
 
-    aside {
+    .auth-page-wrapper aside {
         display: none;
     }
 }

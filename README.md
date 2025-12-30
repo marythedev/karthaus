@@ -1,13 +1,5 @@
 # KartHaus
 
-## Developers
-| Name        |   Role |     Github    |
-| ----------- | --------- | --------- |
-| Stephen Vizl  | Full-stack Developer| svizl1 |
-| Maria Dmytrenko  | UI/UX & Front-End Developer | marythedev |
-| Tianchen Zhang  | Back-End Developer | tzhang98 |
-| Abel Okoh  | Full-Stack Developer | Abellybaba |
-
 This project aims to create a powerful e-commerce platform designed specifically for a retail business. The envisioned website will serve as a comprehensive solution focused on facilitating efficient item sales and empowering the store to leverage data for informed marketing and business decisions. The project will concentrate on implementing key features to optimize the retail e-commerce process with a primary focus on:
 
 ### Responsive Design (On-Going):
@@ -121,3 +113,11 @@ It has been used within the project at different stages to assist with testing (
 
 #### Figma:
 Figma is used to create prototypes of interface design and animations for the web store pages.
+
+## Developers
+| Name        |   Role |     Github    |
+| ----------- | --------- | --------- |
+| Stephen Vizl  | Full-stack Developer| svizl1 |
+| Maria Dmytrenko  | UI/UX & Front-End Developer | marythedev |
+| Tianchen Zhang  | Back-End Developer | tzhang98 |
+| Abel Okoh  | Full-Stack Developer | Abellybaba |

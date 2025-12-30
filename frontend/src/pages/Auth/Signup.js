@@ -74,7 +74,7 @@ const Signup = () => {
             <div className="auth-form-wrapper">
                 <div className="auth-form">
                     <h2>Signup</h2>
-                    <p className="subtitle">Create your account</p>
+                    <p className="auth-subtitle">Create your account</p>
 
                     <form onSubmit={handleSignup}>
                         <input
