@@ -33,7 +33,7 @@ const Account = () => {
 
             <div className="account-buttons">
                 <button onClick={() => navigate("/contact")} className="setting-btn">Contact Support</button>
-                {isAdmin && <button onClick={() => navigate("/adminDashboard")} className="setting-btn">Admin Dashboard</button>}
+                {isAdmin && <button onClick={() => navigate("/admin")} className="setting-btn">Admin Dashboard</button>}
                 <button onClick={handleLogout} className="setting-btn">Logout</button>
             </div>
         </div>

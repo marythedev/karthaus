@@ -15,7 +15,6 @@ const adminController = require("../controllers/adminController");
 const productController = require("../controllers/productController");
 const cartController = require("../controllers/cartController");
 const orderController = require("../controllers/orderController");
-const reviewController = require("../controllers/reviewController");
 const submitContactForm = require("../controllers/contactController");
 const adminLog = require("../controllers/adminLog");
 const email = require("../controllers/email");
@@ -107,14 +106,5 @@ router.put(
     authenticateToken,
     orderController.updateOrderStatus
 );
-
-// Endpoint to add a new review
-router.post("/", reviewController.addReview);
-
-// Endpoint to get reviews for a specific product
-router.get("/product/:productId", reviewController.getReviewsByProduct);
-
-// Endpoint to get reviews submitted by a specific user
-router.get("/user/:userId", reviewController.getReviewsByUser);
 
 module.exports = router;

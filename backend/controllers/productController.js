@@ -29,18 +29,21 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-// UPDATE a product - only add review (Everyone)
+// UPDATE a product - add review & update product rating (Everyone)
 router.put("/addreview/:id", async (req, res) => {
     try {
-        console.log(req.body);
-        console.log(req.body.newProduct.reviews);
+        const reviews = req.body.newProduct.reviews;
+        const sumRating = reviews.reduce((sum, r) => sum + r.rating, 0);
+        const newRating = parseFloat((sumRating / reviews.length).toFixed(1));
+
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
             {
-                $set: { reviews: req.body.newProduct.reviews },
+                $set: { reviews: reviews, rating: newRating },
             },
             { new: true }
         );
+
         res.status(200).json(updatedProduct);
     } catch (err) {
         console.log(err)

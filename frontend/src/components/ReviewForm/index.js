@@ -42,7 +42,6 @@ const ReviewForm = ({ addReview }) => {
 
     return (
         <form className="review-form" onSubmit={handleSubmit}>
-            <img src={window.location.origin + '/images/placeholders/reviewUserAvatar.png'} alt="user" height={65} />
             <div className="review-form-body">
                 <div className="review-form-rating">
                     {[...Array(5)].map((_, index) => (
@@ -56,13 +55,18 @@ const ReviewForm = ({ addReview }) => {
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                     />
-                    <ImageUploader publicKey="9aff252c34d4e829b757" secretKey="18ec2585a2351f059b2f" multiple={true} images={images} onChange={setImages} >
+                    <ImageUploader
+                        cdnDomain={process.env.REACT_APP_CDN_DOMAIN}
+                        publicKey={process.env.REACT_APP_UPLOADCARE_PUBLIC_KEY}
+                        secretKey={process.env.REACT_APP_UPLOADCARE_PRIVATE_KEY}
+                        multiple={true}
+                        images={images}
+                        onChange={setImages}
+                    >
                         <img src={window.location.origin + '/icons/add-image.png'} height={30} alt="add images" />
                     </ImageUploader>
                     <button type="submit" className={rating === 0 ? 'not-working' : ''}>Add Review</button>
                 </div>
-            </div>
-            <div className="preview-images">
             </div>
         </form>
     )

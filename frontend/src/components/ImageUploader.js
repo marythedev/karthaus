@@ -1,33 +1,34 @@
 import { useState, useEffect, useRef } from "react";
 
-const ImageUploader = ({ publicKey, secretKey, multiple = false, children, images, onChange }) => {
+const ImageUploader = ({ cdnDomain, publicKey, secretKey, multiple = false, children, images, onChange }) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [status, setStatus] = useState("ok");
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        if (onChange && uploadedFiles.length > 0) {
+        if (onChange) {
             const filesReady = uploadedFiles
                 .filter(file => file.status === 'ready')
-                .map(file => `https://ucarecdn.com/${file.id}/`);
+                .map(file => `${cdnDomain}${file.id}/`);
 
             onChange(filesReady);
         }
-    }, [uploadedFiles, onChange]);
+    }, [uploadedFiles, onChange, cdnDomain]);
 
     const handleImageChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const selectedFiles = multiple ? Array.from(e.target.files) : [e.target.files[0]];
 
-            const oversizedFiles = selectedFiles.filter(file => file.size > 200 * 1024);
+            const oversizedFiles = selectedFiles.filter(file => file.size > 1 * 1024 * 1024);
 
             if (oversizedFiles.length > 0) {
-                alert("One or more images are too large. Please select files smaller than 500 MB.");
+                alert("One or more images are too large. Please select files smaller than 1 MB.");
                 return;
             }
-            else
-                await uploadImages(selectedFiles);
+
+            await uploadImages(selectedFiles);
         }
+
         if (fileInputRef.current) {
             fileInputRef.current.value = "";
         }
@@ -57,41 +58,20 @@ const ImageUploader = ({ publicKey, secretKey, multiple = false, children, image
                 }
 
                 const data = await response.json();
-                uploadedFilesInfo.push({ id: data.file, name: file.name, status: 'loading' });
+
+                uploadedFilesInfo.push({
+                    id: data.file,
+                    name: file.name,
+                    status: "ready"
+                });
             }
 
             setUploadedFiles((prev) => [...prev, ...uploadedFilesInfo]);
             setStatus("ok");
-
-            // Check if files are ready on CDN
-            for (const file of uploadedFilesInfo) {
-                await checkFileReady(file.id);
-            }
         } catch (error) {
             console.error("Upload error:", error);
             setStatus("fail");
         }
-    };
-
-    const checkFileReady = async (fileId) => {
-        const maxAttempts = 100;
-        const delayMs = 1000;
-
-        for (let attempt = 0; attempt < maxAttempts; attempt++) {
-            try {
-                const response = await fetch(`https://ucarecdn.com/${fileId}/`);
-                if (response.ok) {
-                    setUploadedFiles(prev =>
-                        prev.map(file => file.id === fileId ? { ...file, status: 'ready' } : file)
-                    );
-                    return;
-                }
-            } catch (error) {
-                console.error("Error checking file:", error);
-            }
-            await new Promise(resolve => setTimeout(resolve, delayMs));
-        }
-        console.error(`File ${fileId} not ready after ${maxAttempts} attempts`);
     };
 
     useEffect(() => {
@@ -125,11 +105,7 @@ const ImageUploader = ({ publicKey, secretKey, multiple = false, children, image
     };
 
     return (
-        <div style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end", // Align content to the right
-        }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
             <div style={{ margin: "10px 5px" }}>
                 <input
                     ref={fileInputRef}
@@ -159,38 +135,19 @@ const ImageUploader = ({ publicKey, secretKey, multiple = false, children, image
                                 overflow: "hidden",
                             }}
                         >
-                            {file.status === 'loading' ? (
-                                <div
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        backgroundColor: "#f0f0f0",
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            width: "fit-content",
-                                            fontSize: "10px",
-                                            color: "#555",
-                                        }}
-                                    >
-                                        Uploading...
-                                    </span>
-                                </div>
-                            ) : (
-                                <img
-                                    src={`https://ucarecdn.com/${file.id}/-/preview/300x300/`}
-                                    alt={file.name}
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                    }}
-                                />
-                            )}
+                            <img
+                                src={`${cdnDomain}${file.id}/-/preview/300x300/`}
+                                alt=""
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                }}
+                                onError={(e) => {
+                                    e.currentTarget.src = `${cdnDomain}${file.id}/-/preview/300x300/`;
+                                }}
+                            />
+
                             <div
                                 style={{
                                     position: "absolute",

@@ -44,8 +44,6 @@ const Product = () => {
 
         axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/products/addreview/${id}`, {
             newProduct
-        }).then((response) => {
-            console.log('Review added:', response.data);
         }).catch((error) => {
             console.error('Error adding review:', error);
         });
@@ -105,20 +103,20 @@ const Product = () => {
                                 <p>{product.rating}</p>
                             </div>
                             <p>{product.sold > 2000 ? '2000+' : product.sold} sold</p>
-                            <p style={{ color: product.inStock < 20 ? 'red' : 'black' }}>{product.inStock} left in stock</p>
+                            <p style={{ color: product.quantity < 20 ? 'red' : 'black' }}>{product.quantity} left in stock</p>
                         </div>
                     </div>
 
                     <div className="product-custom-options">
-                        {product.options && product.options.map((option, index) => {
+                        {product.options?.map((option, index) => {
                             if (index < 2) {
                                 if (option.type === "color") {
                                     return (
                                         <div key={index} className="option">
                                             <p>{option.name}</p>
                                             <div className="option-chips">
-                                                {option.options.map((color, index) => (
-                                                    <div key={index} className="color-option">
+                                                {option.options?.map((color, idx) => (
+                                                    <div key={idx} className="color-option">
                                                         <button>
                                                             <img src={window.location.origin + color.image} alt={color.name} />
                                                         </button>
@@ -133,12 +131,14 @@ const Product = () => {
                                         <div key={index} className="option">
                                             <p>{option.name}</p>
                                             <div className="option-chips">
-                                                {option.options.map((chip, index) => (
-                                                    <button key={index} className="option-chip">{chip}</button>
+                                                {option.options?.map((chip, idx) => (
+                                                    <button key={idx} className="option-chip">{chip}</button>
                                                 ))}
                                             </div>
                                         </div>
                                     );
+                                } else {
+                                    return null;
                                 }
                             } else {
                                 return (
@@ -151,7 +151,7 @@ const Product = () => {
                     <div className="buy-product">
                         <button className="add-to-cart">Add to cart</button>
 
-                        <p className='price'>
+                        <div className='price'>
                             {product.priceBefore ?
                                 <div className="sale">
                                     <p className="price-before">${product.priceBefore}</p>
@@ -161,7 +161,7 @@ const Product = () => {
                                 </div>
                                 : null}
                             ${product.price}
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -203,10 +203,10 @@ const Product = () => {
                         sortedReviews().slice(0, visibleReviews).map((review, index) => (
                             <div key={index} className="review-card">
                                 <div className="review">
-                                    <img className="review-avatar" src={window.location.origin + '/images/placeholders/reviewUserAvatar.png'} alt="Reviewer Avatar" />
+                                    <img className="review-avatar" src={window.location.origin + '/icons/profile.png'} alt="Reviewer Avatar" />
                                     <div className="review-body">
                                         <p className="review-author">{review.author}</p>
-                                        <p>{review.comment}</p>
+                                        <p className="review-comment">{review.comment}</p>
                                         {review.images && review.images.length > 0 && (
                                             <div className="review-images">
                                                 {review.images.map((image, index) => (

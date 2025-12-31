@@ -46,10 +46,10 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
 
                     {/* Admin */}
-                    <Route path="/adminDashboard" element={<AdminDash />} />
-                    <Route path="/manageUsers" element={<AdminUsersList />} />
-                    <Route path="/messages" element={<Messages />} />
-                    <Route path="/email" element={<EmailComponent />} />
+                    <Route path="/admin" element={<AdminDash />} />
+                    <Route path="/admin/manage-users" element={<AdminUsersList />} />
+                    <Route path="/admin/messages" element={<Messages />} />
+                    <Route path="/admin/email" element={<EmailComponent />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />} />

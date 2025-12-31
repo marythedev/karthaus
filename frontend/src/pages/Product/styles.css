@@ -224,7 +224,7 @@ td.spec-name {
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .filter-reviews>button:hover,
@@ -238,6 +238,7 @@ td.spec-name {
     flex-direction: row;
     justify-content: space-between;
     margin: 15px 0;
+    width: 100%;
 }
 
 .review {
@@ -247,8 +248,8 @@ td.spec-name {
 }
 
 .review-avatar {
-    width: 65px;
-    height: 65px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -259,6 +260,11 @@ td.spec-name {
 
 .review-author {
     font-weight: 700;
+}
+
+.review-comment {
+    word-break: break-all;
+    overflow: anywhere;
 }
 
 .load-more {

@@ -13,6 +13,7 @@
 
 .navbar h1 {
     margin: 0;
+    font-size: 46px;
 }
 
 .navbar a {
@@ -104,6 +105,11 @@
         gap: 20px;
     }
 
+    .navbar h1 {
+        margin: 0;
+        font-size: 42px;
+    }
+
     #signup-btn {
         display: none;
     }
@@ -124,5 +130,13 @@
         top: auto;
         bottom: 100%;
         margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 728px) {
+
+    .navbar,
+    #search-form-container {
+        padding: 0 25px;
     }
 }
