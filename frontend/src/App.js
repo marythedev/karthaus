@@ -34,26 +34,28 @@ function App() {
             style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
         >
             <Navbar />
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/search" element={<SearchResults />} />
-                <Route path="/product/:id" element={<Product />} />
+            <div className="page-wrapper">
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/search" element={<SearchResults />} />
+                    <Route path="/product/:id" element={<Product />} />
 
-                <Route element={<PrivateRoutes />}>
-                    <Route path="/account" element={<Account />} />
-                    <Route path="/contact" element={<Contact />} />
+                    <Route element={<PrivateRoutes />}>
+                        <Route path="/account" element={<Account />} />
+                        <Route path="/contact" element={<Contact />} />
 
-                    {/* Admin */}
-                    <Route path="/admin" element={<AdminDash />} />
-                    <Route path="/admin/manage-users" element={<AdminUsersList />} />
-                    <Route path="/admin/internal-messages" element={<InternalMessages />} />
-                    <Route path="/admin/email-users" element={<EmailUsers />} />
-                </Route>
+                        {/* Admin */}
+                        <Route path="/admin" element={<AdminDash />} />
+                        <Route path="/admin/manage-users" element={<AdminUsersList />} />
+                        <Route path="/admin/internal-messages" element={<InternalMessages />} />
+                        <Route path="/admin/email-users" element={<EmailUsers />} />
+                    </Route>
 
-                <Route path="*" element={<NotFound />} />
-            </Routes>
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </div>
             <Footer />
         </div>
     );
