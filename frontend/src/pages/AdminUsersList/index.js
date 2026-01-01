@@ -42,7 +42,7 @@ const AdminPage = () => {
         };
 
         fetchUsers();
-    }, []);
+    }, [url]);
 
     const toggleStatus = async (username) => {
         const confirmAction = window.confirm(`Are you sure you want to toggle the status for ${username}?`);
@@ -101,7 +101,18 @@ const AdminPage = () => {
     };
 
     if (loading) return <div>Loading...</div>;
-    if (unauthorized) return <div className="unauthorized-message">Access Denied</div>;
+
+    if (unauthorized) {
+        return (
+            <div className="unauthorized-wrapper">
+                <div className='unauthorized'>
+                    <h2>Unauthorized</h2>
+                <p>You do not have permission to access this page. Please contact your administrator.</p>
+                </div>
+            </div>
+        );
+    }
+
     if (error) return <div>Error: {error}</div>;
 
     return (

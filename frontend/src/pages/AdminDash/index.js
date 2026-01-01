@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { logAction } from '../../components/logAction';
 import ActivityLog from '../../components/ActivityLog';
@@ -12,7 +12,35 @@ const AdminDash = () => {
     const [hasAccess, setHasAccess] = useState(true); // Track if the user has access
     const url = process.env.REACT_APP_BACKEND_URL;
 
-    const fetchLogs = async () => {
+    // Fetch message summary data
+    const fetchMessagesSummary = useCallback(async () => {
+        try {
+            const response = await fetch(`${url}/api/adminMessages`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    setHasAccess(false);
+                } else {
+                    throw new Error('Failed to fetch messages summary');
+                }
+            }
+
+            const data = await response.json();
+            setUnreadMessages(data.unreadMessages || 0);
+            setTotalMessages(data.totalMessages || 0);
+        } catch (error) {
+            console.error('Error fetching messages summary:', error);
+            setHasAccess(false); // Deny access if error occurs
+        }
+    }, [url]);
+
+    const fetchLogs = useCallback(async () => {
         try {
             const response = await fetch(`${url}/api/log`, {
                 method: 'GET',
@@ -38,35 +66,7 @@ const AdminDash = () => {
             console.error('Error fetching logs:', error);
             setHasAccess(false); // Deny access if error occurs
         }
-    };
-
-    // Fetch message summary data
-    const fetchMessagesSummary = async () => {
-        try {
-            const response = await fetch(`${url}/api/adminMessages`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
-
-            if (!response.ok) {
-                if (response.status === 403) {
-                    setHasAccess(false);
-                } else {
-                    throw new Error('Failed to fetch messages summary');
-                }
-            }
-
-            const data = await response.json();
-            setUnreadMessages(data.unreadMessages || 0);
-            setTotalMessages(data.totalMessages || 0);
-        } catch (error) {
-            console.error('Error fetching messages summary:', error);
-            setHasAccess(false); // Deny access if error occurs
-        }
-    };
+    }, [fetchMessagesSummary, url]);
 
     // Log actions like clicks
     const handleLogAction = async (logMessage) => {
@@ -91,13 +91,15 @@ const AdminDash = () => {
     // Run fetch when the component mounts
     useEffect(() => {
         fetchLogs();
-    }, []);
+    }, [fetchLogs]);
 
     if (!hasAccess) {
         return (
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <h2>Unauthorized</h2>
-                <p>You do not have permission to access this page. Please contact the administrator.</p>
+            <div className="unauthorized-wrapper">
+                <div className='unauthorized'>
+                    <h2>Unauthorized</h2>
+                <p>You do not have permission to access this page. Please contact your administrator.</p>
+                </div>
             </div>
         );
     }
@@ -113,8 +115,8 @@ const AdminDash = () => {
                         </Link>
                     </li>
                     <li><Link to="/admin/email-users" onClick={() => handleLogAction('clicked into Emailer')}>Send Emails</Link></li>
-                    <li><Link to="#" onClick={() => handleLogAction('clicked Module 3')}>Placeholder Module 3</Link></li>
-                    <li><Link to="#" onClick={() => handleLogAction('clicked Module 4')}>Placeholder Module 4</Link></li>
+                    <li><Link to="#" onClick={() => handleLogAction('clicked Module 1')}>Placeholder Module</Link></li>
+                    <li><Link to="#" onClick={() => handleLogAction('clicked Module 2')}>Placeholder Module</Link></li>
                 </ul>
             </div>
 
@@ -123,7 +125,7 @@ const AdminDash = () => {
 
                 {/* Cards */}
                 <div className="admin-card-container">
-                    <div className="admin-card" onClick={() => handleLogAction('clicked into messages')}>
+                    <div className="admin-card" onClick={() => handleLogAction('clicked into Internal Messages')}>
                         <Link to="/admin/internal-messages">
                             <img src="/icons/email.png" alt="Messages" style={{ width: '50px', height: '50px' }} />
                             <div style={{ marginTop: '10px', fontWeight: 'bold' }}>Internal Messages</div>
@@ -133,14 +135,14 @@ const AdminDash = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="admin-card" onClick={() => handleLogAction('clicked Card 2')}>
-                        <Link to="#">Placeholder Link 2</Link>
+                    <div className="admin-card" onClick={() => handleLogAction('clicked Link 1')}>
+                        <Link to="#">Placeholder Link</Link>
                     </div>
-                    <div className="admin-card" onClick={() => handleLogAction('clicked Card 3')}>
-                        <Link to="#">Placeholder Link 3</Link>
+                    <div className="admin-card" onClick={() => handleLogAction('clicked Link 2')}>
+                        <Link to="#">Placeholder Link</Link>
                     </div>
-                    <div className="admin-card" onClick={() => handleLogAction('clicked Card 4')}>
-                        <Link to="#">Placeholder Link 4</Link>
+                    <div className="admin-card" onClick={() => handleLogAction('clicked Link 3')}>
+                        <Link to="#">Placeholder Link</Link>
                     </div>
                 </div>
 

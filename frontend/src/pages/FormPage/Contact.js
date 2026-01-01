@@ -64,7 +64,6 @@ const Contact = () => {
                         />
 
                         <textarea
-                            type="text"
                             placeholder="Message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}

@@ -12,7 +12,7 @@ import Contact from "./pages/FormPage/Contact";
 import AdminUsersList from "./pages/AdminUsersList";
 import AdminDash from "./pages/AdminDash";
 import InternalMessages from "./pages/InternalMessages";
-import EmailComponent from "./components/Email";
+import EmailUsers from "./pages/FormPage/Email";
 import NotFound from "./pages/NotFound";
 
 const PrivateRoutes = () => {
@@ -49,7 +49,7 @@ function App() {
                     <Route path="/admin" element={<AdminDash />} />
                     <Route path="/admin/manage-users" element={<AdminUsersList />} />
                     <Route path="/admin/internal-messages" element={<InternalMessages />} />
-                    <Route path="/admin/email-users" element={<EmailComponent />} />
+                    <Route path="/admin/email-users" element={<EmailUsers />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />} />

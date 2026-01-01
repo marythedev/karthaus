@@ -319,9 +319,11 @@ const InternalMessages = () => {
 
     if (!isAdmin) {
         return (
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <h2>Unauthorized</h2>
+            <div className="unauthorized-wrapper">
+                <div className='unauthorized'>
+                    <h2>Unauthorized</h2>
                 <p>You do not have permission to access this page. Please contact your administrator.</p>
+                </div>
             </div>
         );
     }
