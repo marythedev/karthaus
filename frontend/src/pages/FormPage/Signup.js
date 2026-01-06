@@ -45,12 +45,16 @@ const Signup = () => {
             })
             .then(response => {
                 setResponseStatus(response.status);
-                return response.json();
+
+                return response.json().then(data => ({
+                    ok: response.ok,
+                    ...data
+                }));
             })
             .then(data => {
                 if (data.message) {
                     setResponseMessage(data.message);
-                    if (responseStatus !== 400) {
+                    if (data.ok) {
                         alert("Account has been created.");
                         navigate("/login");
                         window.location.reload();

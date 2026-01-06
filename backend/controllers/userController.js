@@ -50,7 +50,7 @@ async function createUser(req, res) {
         }
 
         let valid = validatePassword(password);
-        if (valid == false) {
+        if (!valid) {
             return res.status(400).json({
                 message: `Password must be between ${min} and ${max} characters long`,
             });
