@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ProductCard = (props) => {
     let productLink = '/' + props.productid;
     return (
-        <Link to={'/product/' + props.productid} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Link to={'/product/' + props.productid} style={{ textDecoration: 'none', color: 'inherit', minWith: '100%', maxWidth: "575px" }}>
             <Card style={{ margin: '5px', borderRadius: '15px', height: "285px" }}>
                 <a href={productLink} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Card.Img variant="top" src={props.image} style={{ borderRadius: '15px', height: "215px", objectFit: "cover" }} />

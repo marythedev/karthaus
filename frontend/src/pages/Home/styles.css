@@ -1,4 +1,3 @@
-/* Home.css */
 .home-body {
     background-color: transparent;
     color: black;
@@ -55,7 +54,7 @@ li {
     width: 100%;
 }
 
-.scroll-btn {
+#home-category-container .scroll-btn {
     background-color: transparent;
     height: 100%;
     border: none;
@@ -64,27 +63,26 @@ li {
     padding: 0;
 }
 
-.scroll-btn:hover {
+#home-category-container .scroll-btn:hover {
     background-color: transparent;
 }
 
-
-.scroll-btn img {
+#home-category-container .scroll-btn img {
     display: none;
 }
 
-.scroll-btn#prev {
+#home-category-container .scroll-btn#prev {
     padding-left: 25px;
     padding-right: 15px;
 }
 
-.scroll-btn#next {
+#home-category-container .scroll-btn#next {
     padding-right: 25px;
     padding-left: 15px;
 }
 
 @media screen and (max-width: 1060px) {
-    .scroll-btn img {
+    #home-category-container .scroll-btn img {
         display: block;
     }
 }

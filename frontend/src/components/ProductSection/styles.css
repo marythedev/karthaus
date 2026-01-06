@@ -1,24 +1,45 @@
-section {
+.product-section {
+    position: relative;
     padding: 35px;
     margin: 0;
 }
 
 h4 {
     font-weight: 700;
+    margin-bottom: 15px;
 }
 
-.products {
+.product-section .products {
+    display: flex;
+    overflow-x: hidden;
     gap: 20px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 100%;
-    text-overflow: hidden;
+    scroll-behavior: smooth;
 }
 
-.products>* {
-    flex: 1 1 0;
-    max-width: 330px;
-    min-width: 240px;
+.product-section .products>* {
+    flex: 0 0 330px;
+    min-width: 330px !important;
+}
+
+.product-section .scroll-btn {
+    position: absolute;
+    top: 50%;
+    height: 100%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    padding: 12px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.product-section .scroll-left {
+    left: 0;
+}
+
+.product-section .scroll-right {
+    right: 0;
 }
 
 @media screen and (max-width: 1060px) {
