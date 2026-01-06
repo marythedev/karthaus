@@ -8,6 +8,7 @@
     object-position: center;
     width: 100%;
     max-height: 500px;
+    min-height: 275px;
 }
 
 .dimmer {
@@ -28,4 +29,10 @@
     color: white;
     font-size: 2em;
     font-weight: 750;
+}
+
+@media screen and (max-width: 478px) {
+    #carousel .league-spartan-bold {
+        font-size: 0.7rem;
+    }
 }

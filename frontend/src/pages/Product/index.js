@@ -154,15 +154,16 @@ const Product = () => {
                         <button className="add-to-cart">Add to cart</button>
 
                         <div className='price'>
+                            ${product.price}
                             {product.priceBefore ?
                                 <div className="sale">
-                                    <p className="price-before">${product.priceBefore}</p>
                                     <p className="discount">{
                                         Math.ceil(((product.priceBefore - product.price) / product.priceBefore) * 100)
                                     }% off</p>
+                                    <p className="price-before">${product.priceBefore}</p>
                                 </div>
-                                : null}
-                            ${product.price}
+                                : null
+                            }
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,7 @@
 
 .product-page h3 {
     font-weight: 750;
+    padding-bottom: 10px;
 }
 
 .product-desc .seller {
@@ -88,6 +89,7 @@
 
 .option>p {
     font-weight: 700;
+    padding-bottom: 10px;
 }
 
 .option-chips {
@@ -172,6 +174,7 @@ button.add-to-cart:hover {
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 15px;
 }
 
@@ -180,11 +183,14 @@ button.add-to-cart:hover {
     flex-direction: column;
     font-size: 0.8rem;
     text-align: right;
+    line-height: 1.25;
 }
 
 .buy-product .price-before {
     text-decoration: line-through;
     font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.7rem;
 }
 
 .buy-product .discount {
@@ -224,7 +230,6 @@ td.spec-name {
 
 .review-section {
     max-height: 700px;
-    padding: 15px;
     overflow-x: hidden;
 }
 
@@ -234,6 +239,7 @@ td.spec-name {
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
 .filter-reviews>button {
@@ -315,11 +321,6 @@ td.spec-name {
         margin: 15px 35px;
     }
 
-    .specs,
-    .reviews {
-        margin-top: 50px;
-    }
-
     .overview {
         flex-direction: column;
     }
@@ -355,6 +356,10 @@ td.spec-name {
 
     tbody {
         grid-template-columns: 1fr;
+    }
+
+    .filter-reviews {
+        justify-content: flex-start;
     }
 
     .review-card {

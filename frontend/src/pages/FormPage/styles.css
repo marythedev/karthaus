@@ -77,7 +77,7 @@
 .checkbox-group input {
     width: fit-content;
     height: 12px;
-    margin: 0;
+    margin: 4px;
     margin-right: 10px;
 }
 
