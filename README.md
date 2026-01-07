@@ -18,7 +18,7 @@ This project is a powerful **e-commerce platform** designed specifically for ret
 
 <div style="display: flex; flex-direction: row;">
   <img height="360" alt="image" src="https://github.com/user-attachments/assets/0696e87d-2220-4e5b-8456-8a578d560280" />
-  &nbsp;&nbsp;&nbsp;
+  &nbsp;
   <img height="360" alt="image" src="https://github.com/user-attachments/assets/678e0e7c-241d-47fc-9f3d-a5a6f68a10b1" />
 </div>
 
